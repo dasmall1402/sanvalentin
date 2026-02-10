@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Valentín 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f8cdda, #fcb69f);
+      overflow: hidden;
+    }
+
+    .pantalla {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .oculto {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.9);
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 350px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #e84393;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 200px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .botones {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 10px;
+      position: relative;
+      height: 60px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+    }
+
+    #btnSi {
+      background: #ff4d88;
+      color: white;
+      left: 20%;
+    }
+
+    #btnNo {
+      background: #95a5a6;
+      color: white;
+      left: 55%;
+    }
+
+    .fondo-final {
+      background: radial-gradient(circle at top, #1a001f, #000);
+      color: white;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .mensaje-final {
+      max-width: 500px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(255,0,150,0.4);
+    }
+
+    .mensaje-final img {
+      width: 220px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla 1 -->
+  <div id="pantalla1" class="pantalla">
+    <div class="card" onclick="mostrarPregunta()">
+      <h1>¡Hola! Tengo algo que decirte 💌</h1>
+      <p>Toca la pantalla 👆</p>
+    </div>
+  </div>
+
+  <!-- Pantalla 2 -->
+  <div id="pantalla2" class="pantalla oculto">
+    <div class="card">
+      <img src="https://i.imgur.com/4M7IWwP.gif" alt="gatito" />
+      <h1>¿Quieres ser mi San Valentín? 🥺</h1>
+      <p>Prometo hacerte muy feliz ❤️</p>
+
+      <div class="botones">
+        <button id="btnSi" onclick="aceptar()">Sí 🥰</button>
+        <button id="btnNo" onmouseover="moverNo()">No 😢</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pantalla 3 -->
+  <div id="pantalla3" class="pantalla oculto fondo-final">
+    <div class="mensaje-final">
+      <h1>Para mi San Valentín... ❤️</h1>
+      <p>
+        Gracias por llenar mis días de alegría y hacer que mi corazón lata más fuerte.
+        No hay nadie en el mundo con quien prefiera estar más que contigo.
+        ¡Te quiero muchísimo! ✨💖
+      </p>
+      <img src="https://i.imgur.com/1bX5QH6.gif" alt="gatitos abrazados" />
+    </div>
+  </div>
+
+  <script>
+    let escalaSi = 1;
+    let escalaNo = 1;
+
+    function mostrarPregunta() {
+      document.getElementById('pantalla1').classList.add('oculto');
+      document.getElementById('pantalla2').classList.remove('oculto');
+    }
+
+    function moverNo() {
+      const btnNo = document.getElementById('btnNo');
+      const btnSi = document.getElementById('btnSi');
+
+      const maxX = window.innerWidth - 100;
+      const maxY = window.innerHeight - 50;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      btnNo.style.left = x + 'px';
+      btnNo.style.top = y + 'px';
+
+      escalaSi += 0.1;
+      escalaNo -= 0.05;
+
+      btnSi.style.transform = `scale(${escalaSi})`;
+      btnNo.style.transform = `scale(${Math.max(escalaNo, 0.3)})`;
+    }
+
+    function aceptar() {
+      document.getElementById('pantalla2').classList.add('oculto');
+      document.getElementById('pantalla3').classList.remove('oculto');
+    }
+  </script>
+
+</body>
+</html>
