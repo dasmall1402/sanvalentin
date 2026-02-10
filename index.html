@@ -128,12 +128,24 @@ function drawStars(){
 }
 drawStars();
 
+// ====== MÚSICA ======
+const musica = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3c1c2b6c.mp3?filename=romantic-love-11786.mp3');
+musica.loop = true;
+musica.volume = 0.6;
+let musicaIniciada = false;
+
 // ====== LÓGICA BOTONES ======
 let escalaSi=1, escalaNo=1;
 
 function mostrarPregunta(){
   pantalla1.classList.add('oculto');
   pantalla2.classList.remove('oculto');
+
+  // iniciar música en el primer toque
+  if(!musicaIniciada){
+    musica.play().catch(()=>{});
+    musicaIniciada = true;
+  }
 }
 
 function moverNo(){
